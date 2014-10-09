@@ -1,12 +1,9 @@
-
 { TickerBTCE
-Этот модуль написан для программы BTC-Ealarm, для  получения данных с биржи BTC-e.
- Для работы модуля требуется библиотеку Synapse и модуль uLkJSON.pas которые можете найти на у меня насайти blog.kolja153.com.
-Этот модуль написан для личного использования. Запрещается использовать, менять модуль без ссылок на автора.
- Автор Kolja153. Узнать быльше вы можете на сайтах https://bitcointalk.org . http://blog.kolja153.com/. https://forum.btcsec.com/index.php?/blog/90-kolja153s-blog/
- 
-Донейт       : BTC = 1F3BtisPs8dtKLSATLWqe1SH44P4VQuX6o                     
-               LTC = LdGP4AqWD4N3Fnffm7jgMmvW1U3TQ9KExN
+Р­С‚РѕС‚ РјРѕРґСѓР»СЊ РЅР°РїРёСЃР°РЅ РґР»СЏ РїСЂРѕРіСЂР°РјРјС‹ BTC-Ealarm, РґР»СЏ  РїРѕР»СѓС‡РµРЅРёСЏ РґР°РЅРЅС‹С… СЃ Р±РёСЂР¶Рё BTC-e.
+ Р”Р»СЏ СЂР°Р±РѕС‚С‹ РјРѕРґСѓР»СЏ С‚СЂРµР±СѓРµС‚СЃСЏ Р±РёР±Р»РёРѕС‚РµРєСѓ Synapse Рё РјРѕРґСѓР»СЊ uLkJSON.pas РєРѕС‚РѕСЂС‹Рµ РјРѕР¶РµС‚Рµ РЅР°Р№С‚Рё РЅР° Сѓ РјРµРЅСЏ РЅР°СЃР°Р№С‚Рё blog.kolja153.com.
+Р­С‚РѕС‚ РјРѕРґСѓР»СЊ РЅР°РїРёСЃР°РЅ РґР»СЏ Р»РёС‡РЅРѕРіРѕ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ. Р—Р°РїСЂРµС‰Р°РµС‚СЃСЏ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ, РјРµРЅСЏС‚СЊ РјРѕРґСѓР»СЊ Р±РµР· СЃСЃС‹Р»РѕРє РЅР° Р°РІС‚РѕСЂР°.
+ РђРІС‚РѕСЂ Kolja153. РЈР·РЅР°С‚СЊ Р±С‹Р»СЊС€Рµ РІС‹ РјРѕР¶РµС‚Рµ РЅР° СЃР°Р№С‚Р°С… https://bitcointalk.org . http://blog.kolja153.com/. https://forum.btcsec.com/index.php?/blog/90-kolja153s-blog/
+   donate: nvc    4a48f5Hmniw5rx8JTiNc98STTWMDDH8fgR
 
 
 }
@@ -18,28 +15,28 @@ uses
   Classes, httpsend,synacode,ssl_openssl,SysUtils,
   uLkJSON, URLMon,DateUtils;
 
-{Возвращает значения last,buy,sell,date,time,high,low,avg,vol,vol_cur,update,uptime (строки) для перемнной Link (например https://btc-e.com/api/2/btc_usd/ticker)}
+{Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёСЏ last,buy,sell,date,time,high,low,avg,vol,vol_cur,update,uptime (СЃС‚СЂРѕРєРё) РґР»СЏ РїРµСЂРµРјРЅРЅРѕР№ Link (РЅР°РїСЂРёРјРµСЂ https://btc-e.com/api/2/btc_usd/ticker)}
 function AnswerLink(link:string; var last,buy,sell,date,time,high,low,avg,vol,vol_cur,update,uptime:string):string;
 
-{Возвращает одно значения last,buy,sell,date,time,high,low,avg,vol,vol_cur,update,uptime (строки) для перемнной Pair (например btc_usd, buy)}
+{Р’РѕР·РІСЂР°С‰Р°РµС‚ РѕРґРЅРѕ Р·РЅР°С‡РµРЅРёСЏ last,buy,sell,date,time,high,low,avg,vol,vol_cur,update,uptime (СЃС‚СЂРѕРєРё) РґР»СЏ РїРµСЂРµРјРЅРЅРѕР№ Pair (РЅР°РїСЂРёРјРµСЂ btc_usd, buy)}
 function AnswerPair(Pair,parametr:string; var value:real):real;
 
-{Возвращает 5 значения last,buy,sell,date,time (строки) для перемнной Pair (например btc_usd, last,buy,sell,date,time)}
+{Р’РѕР·РІСЂР°С‰Р°РµС‚ 5 Р·РЅР°С‡РµРЅРёСЏ last,buy,sell,date,time (СЃС‚СЂРѕРєРё) РґР»СЏ РїРµСЂРµРјРЅРЅРѕР№ Pair (РЅР°РїСЂРёРјРµСЂ btc_usd, last,buy,sell,date,time)}
 function AnswerPair1(Pair:string; var last,buy,sell,date,time:string):string;
 
-{Возвращает 7 значения high,low,avg,vol,vol_cur,update,uptime (строки) для перемнной Pair (например btc_usd, high,low,avg,vol,vol_cur,update,uptime)}
+{Р’РѕР·РІСЂР°С‰Р°РµС‚ 7 Р·РЅР°С‡РµРЅРёСЏ high,low,avg,vol,vol_cur,update,uptime (СЃС‚СЂРѕРєРё) РґР»СЏ РїРµСЂРµРјРЅРЅРѕР№ Pair (РЅР°РїСЂРёРјРµСЂ btc_usd, high,low,avg,vol,vol_cur,update,uptime)}
 function AnswerPair2(Pair:string; var high,low,avg,vol,vol_cur,update,uptime:string):string;
 
-{Возвращает  значения last (real) для перемнной Pair (например btc_usd, last)}
+{Р’РѕР·РІСЂР°С‰Р°РµС‚  Р·РЅР°С‡РµРЅРёСЏ last (real) РґР»СЏ РїРµСЂРµРјРЅРЅРѕР№ Pair (РЅР°РїСЂРёРјРµСЂ btc_usd, last)}
 function AnswerLast(Pair:string):real;
 
-{Возвращает  значения buy (real) для перемнной Pair (например btc_usd, buy)}
+{Р’РѕР·РІСЂР°С‰Р°РµС‚  Р·РЅР°С‡РµРЅРёСЏ buy (real) РґР»СЏ РїРµСЂРµРјРЅРЅРѕР№ Pair (РЅР°РїСЂРёРјРµСЂ btc_usd, buy)}
 function AnswerBuy(Pair:string):real;
 
-{Возвращает  значения shell (real) для перемнной Pair (например btc_usd, shell)}
+{Р’РѕР·РІСЂР°С‰Р°РµС‚  Р·РЅР°С‡РµРЅРёСЏ shell (real) РґР»СЏ РїРµСЂРµРјРЅРЅРѕР№ Pair (РЅР°РїСЂРёРјРµСЂ btc_usd, shell)}
 function AnswerSell(Pair:string):real;
 
-{Возвращает  значения Err  (boolean) для перемнной Pair (например btc_usd, last) правильно ли ввели пару}
+{Р’РѕР·РІСЂР°С‰Р°РµС‚  Р·РЅР°С‡РµРЅРёСЏ Err  (boolean) РґР»СЏ РїРµСЂРµРјРЅРЅРѕР№ Pair (РЅР°РїСЂРёРјРµСЂ btc_usd, last) РїСЂР°РІРёР»СЊРЅРѕ Р»Рё РІРІРµР»Рё РїР°СЂСѓ}
 function AnswerErr(Pair:string;var err:boolean):string;
 
 implementation
@@ -55,7 +52,7 @@ begin
  if Http.HTTPMethod('GET',Link) then
   Begin
   ts:= TStringList.Create;               //
-  ts.LoadFromStream(Http.Document);      //   Отримуємо дані  з сайту
+  ts.LoadFromStream(Http.Document);      //   РћС‚СЂРёРјСѓС”РјРѕ РґР°РЅС–  Р· СЃР°Р№С‚Сѓ
 
  js := TlkJSON.ParseText(ts.Text ) as TlkJSONobject;
  js := js.Field['ticker'] as TlkJSONobject;
@@ -93,6 +90,7 @@ uptime:= timeToStr( UnixToDateTime(strtoint(js.Field['updated'].Value)));
 result :=uptime;
 
 ts.Free;
+js.Free;
 
 end;
 end;
@@ -109,7 +107,7 @@ begin
  if Http.HTTPMethod('GET','https://btc-e.com/api/2/'+Pair+'/ticker') then
   Begin
   ts:= TStringList.Create;               //
-  ts.LoadFromStream(Http.Document);      //   Отримуємо дані  з сайту
+  ts.LoadFromStream(Http.Document);      //   РћС‚СЂРёРјСѓС”РјРѕ РґР°РЅС–  Р· СЃР°Р№С‚Сѓ
 
  js := TlkJSON.ParseText(ts.Text ) as TlkJSONobject;
  js := js.Field['ticker'] as TlkJSONobject;
@@ -117,6 +115,7 @@ begin
 value:= strtofloat(js.Field[parametr].Value);
 result :=value;
 ts.Free;
+js.Free;
  end;
 end;
 
@@ -133,7 +132,7 @@ begin
  if Http.HTTPMethod('GET','https://btc-e.com/api/2/'+Pair+'/ticker') then
   Begin
   ts:= TStringList.Create;               //
-  ts.LoadFromStream(Http.Document);      //   Отримуємо дані  з сайту
+  ts.LoadFromStream(Http.Document);      //   РћС‚СЂРёРјСѓС”РјРѕ РґР°РЅС–  Р· СЃР°Р№С‚Сѓ
 
  js := TlkJSON.ParseText(ts.Text ) as TlkJSONobject;
  js := js.Field['ticker'] as TlkJSONobject;
@@ -152,6 +151,7 @@ time := TimeToStr( UnixToDateTime(strtoint(js.Field['server_time'].Value)));
 result :=sell;
 
 ts.Free;
+js.Free;
 
 end;
 
@@ -168,7 +168,7 @@ begin
  if Http.HTTPMethod('GET','https://btc-e.com/api/2/'+Pair+'/ticker') then
   Begin
   ts:= TStringList.Create;               //
-  ts.LoadFromStream(Http.Document);      //   Отримуємо дані  з сайту
+  ts.LoadFromStream(Http.Document);      //   РћС‚СЂРёРјСѓС”РјРѕ РґР°РЅС–  Р· СЃР°Р№С‚Сѓ
 
  js := TlkJSON.ParseText(ts.Text ) as TlkJSONobject;
  js := js.Field['ticker'] as TlkJSONobject;
@@ -192,6 +192,7 @@ uptime:= timeToStr( UnixToDateTime(strtoint(js.Field['updated'].Value)));
 result :=uptime;
 
 ts.Free;
+js.Free;
 
 end;
 
@@ -208,7 +209,7 @@ begin
  if Http.HTTPMethod('GET','https://btc-e.com/api/2/'+Pair+'/ticker') then
   Begin
   ts:= TStringList.Create;               //
-  ts.LoadFromStream(Http.Document);      //   Отримуємо дані  з сайту
+  ts.LoadFromStream(Http.Document);      //   РћС‚СЂРёРјСѓС”РјРѕ РґР°РЅС–  Р· СЃР°Р№С‚Сѓ
 
  js := TlkJSON.ParseText(ts.Text ) as TlkJSONobject;
  js := js.Field['ticker'] as TlkJSONobject;
@@ -217,6 +218,7 @@ result:=strtofloat( (js.Field['last'].Value));
 
 
 ts.Free;
+js.Free;
 
 end;
 
@@ -233,7 +235,7 @@ begin
  if Http.HTTPMethod('GET','https://btc-e.com/api/2/'+Pair+'/ticker') then
   Begin
   ts:= TStringList.Create;               //
-  ts.LoadFromStream(Http.Document);      //   Отримуємо дані  з сайту
+  ts.LoadFromStream(Http.Document);      //   РћС‚СЂРёРјСѓС”РјРѕ РґР°РЅС–  Р· СЃР°Р№С‚Сѓ
 
  js := TlkJSON.ParseText(ts.Text ) as TlkJSONobject;
  js := js.Field['ticker'] as TlkJSONobject;
@@ -242,6 +244,7 @@ result:=strtofloat( (js.Field['buy'].Value));
 
 
 ts.Free;
+js.Free;
 
 end;
 
@@ -259,14 +262,14 @@ begin
  if Http.HTTPMethod('GET','https://btc-e.com/api/2/'+Pair+'/ticker') then
   Begin
   ts:= TStringList.Create;               //
-  ts.LoadFromStream(Http.Document);      //   Отримуємо дані  з сайту
+  ts.LoadFromStream(Http.Document);      //   РћС‚СЂРёРјСѓС”РјРѕ РґР°РЅС–  Р· СЃР°Р№С‚Сѓ
 
   js := TlkJSON.ParseText(ts.Text ) as TlkJSONobject;
   js := js.Field['ticker'] as TlkJSONobject;
 result:= (js.Field['sell'].Value);
 
 ts.Free;
-
+js.Free;
 
 end;
 
@@ -282,7 +285,7 @@ begin
  if Http.HTTPMethod('GET','https://btc-e.com/api/2/'+Pair+'/ticker') then
   Begin
   ts:= TStringList.Create;               //
-  ts.LoadFromStream(Http.Document);        //   Отримуємо дані  з сайту
+  ts.LoadFromStream(Http.Document);        //   РћС‚СЂРёРјСѓС”РјРѕ РґР°РЅС–  Р· СЃР°Р№С‚Сѓ
  if copy(ts.Text,3,5)='error' then
   begin
   err:=true;
@@ -294,6 +297,9 @@ begin
   result:='good';
 
  end;
+ ts.Free;
+ js.Free;
+
 end;
 end;
 
